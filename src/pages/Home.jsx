@@ -1,6 +1,31 @@
 import { Link } from "react-router-dom";
 import products from "../assets/data/products.json";
 
+const categoriesData = [
+  {
+    id: 1,
+    name: "Electronics",
+    image: "https://images.unsplash.com/photo-1510552776732-01acc6c9e0e0?auto=format&fit=crop&w=80&q=80",
+  },
+  {
+    id: 2,
+    name: "Clothing",
+    image: "https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?auto=format&fit=crop&w=80&q=80",
+  },
+  {
+    id: 3,
+    name: "Books",
+    image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=80&q=80",
+  },
+  {
+    id: 4,
+    name: "Food",
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=80&q=80",
+  },
+];
+
+
+
 export default function Home() {
   const items = products;
 
@@ -50,25 +75,18 @@ export default function Home() {
 
         {/* Featured Products */}
         <section className="space-y-3">
-          <div className="flex items-end justify-between">
-            <h2 className="text-lg font-semibold">Featured products</h2>
-            <Link to="/products" className="text-sm text-slate-700 underline">
-              View all
-            </Link>
-          </div>
-
-          <div className="space-y-3 gap-4">
+ <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {featured.map((p) => (
               <Link
                 key={p.id}
                 to={`/products/${p.id}`}
                 className="block rounded-2xl border bg-white p-4 hover:shadow-sm transition"
               >
-                <div className="flex gap-3">
+                <div className="flex flex-col gap-3">
                   <img
                     src={p.images?.[0] ?? "https://placehold.co/600x400"}
                     alt={p.title}
-                    className="h-20 w-20 shrink-0 rounded-xl object-cover"
+                    className="w-full aspect-3/2 rounded-xl object-cover"
                     loading="lazy"
                   />
                   <div className="min-w-0 flex-1">
@@ -81,7 +99,7 @@ export default function Home() {
                       </div>
                       <div className="shrink-0 font-semibold">${p.price}</div>
                     </div>
-
+            
                     <p className="mt-2 line-clamp-2 text-sm text-slate-600">
                       {p.description}
                     </p>
@@ -90,33 +108,32 @@ export default function Home() {
               </Link>
             ))}
           </div>
-        </section>
-
+</section>
         {/* Categories */}
-        <section className="space-y-3">
-          <h2 className="text-lg font-semibold">Categories</h2>
+    <section className="space-y-3">
+      <h2 className="text-lg font-semibold">Categories</h2>
 
-          <div className="space-y-3">
-            {categories.map((c) => (
-              <Link
-                key={c.id}
-                to="/products"
-                className="flex items-center gap-3 rounded-2xl border bg-white p-4 hover:bg-slate-50 transition"
-              >
-                <img
-                  src={c.image}
-                  alt={c.name}
-                  className="h-12 w-12 rounded-xl object-cover"
-                  loading="lazy"
-                />
-                <div className="min-w-0">
-                  <div className="truncate font-medium">{c.name}</div>
-                  <div className="text-xs text-slate-600">Tap to browse</div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
+        {categories.map((c) => (
+          <Link
+            key={c.id}
+            to="/products"
+            className="flex items-center gap-3 rounded-2xl border bg-white p-4 hover:bg-slate-50 transition"
+          >
+            <img
+              src={c.image}
+              alt={c.name}
+              className="h-12 w-12 rounded-xl object-cover"
+              loading="lazy"
+            />
+            <div className="min-w-0">
+              <div className="truncate font-medium">{c.name}</div>
+              <div className="text-xs text-slate-600">Tap to browse</div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
 
         {/* Latest Products */}
         <section className="space-y-3">
